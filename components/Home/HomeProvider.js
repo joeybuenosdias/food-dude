@@ -7,11 +7,12 @@ export default function HomeProvider({
     children,
 }) {
     const [homePageState, setHomePageState] = useState({
-        categoryData,
-        areaData,
+        categoryData: categoryData || { meals: [] },
+        areaData: areaData || { meals: [] },
         activeList: [],
         isLoadingList: false,
         hasError: false,
+        foodItem: {},
     })
 
     function handleFetchCategory(category) {
@@ -22,6 +23,7 @@ export default function HomeProvider({
                 ...homePageState,
                 activeList: data.meals,
                 isLoadingList: false,
+                foodItem: {},
             }))
             .catch(err => setHomePageState({ hasError: true, isLoadingList: false, ...homePageState }))
     }
@@ -34,6 +36,19 @@ export default function HomeProvider({
                 ...homePageState,
                 activeList: data.meals,
                 isLoadingList: false,
+                foodItem: {},
+            }))
+            .catch(err => setHomePageState({ hasError: true, isLoadingList: false, ...homePageState }))
+    }
+
+    function handleSetFoodItem(id) {
+        setHomePageState({ ...homePageState, isLoadingList: true })
+        fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
+            .then(res => res.json())
+            .then(data => setHomePageState({
+                ...homePageState,
+                foodItem: { ...data.meals[0] },
+                isLoadingList: false,
             }))
             .catch(err => setHomePageState({ hasError: true, isLoadingList: false, ...homePageState }))
     }
@@ -42,6 +57,7 @@ export default function HomeProvider({
         <HomeContext.Provider value={{
             handleFetchCategory,
             handleFetchArea,
+            handleSetFoodItem,
             ...homePageState,
         }}>
             {children}
