@@ -1,7 +1,11 @@
+.subFilter {
+    padding: 16px 0;
+}
+
 .title {
     color: white;
     font-weight: bold;
-    margin: 16px 0;
+    margin: 0;
 }
 
 .btn {
