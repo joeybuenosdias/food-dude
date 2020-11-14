@@ -1,0 +1,28 @@
+.filter {
+
+}
+
+.subFilter {
+
+}
+
+.title {
+    color: white;
+    font-weight: bold;
+    margin: 16px 0;
+}
+
+.btn {
+    padding: 8px;
+    color: #003060;
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+    margin: 0 8px 8px 0;
+    font-weight: bold;
+}
+
+.btn:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}

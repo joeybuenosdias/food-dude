@@ -9,7 +9,16 @@ export default function HomeProvider({
     const [homePageState, setHomePageState] = useState({ categoryData, areaData })
 
     function handleFetchCategory(category) {
-        fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=' + category)
+        fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
+            .then(res => res.json())
+            .then(data => setHomePageState({
+                ...homePageState,
+                activeList: data.meals,
+            }))
+    }
+
+    function handleFetchArea(area) {
+        fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`)
             .then(res => res.json())
             .then(data => setHomePageState({
                 ...homePageState,
@@ -18,7 +27,11 @@ export default function HomeProvider({
     }
 
     return (
-        <HomeContext.Provider value={{...homePageState, handleFetchCategory}}>
+        <HomeContext.Provider value={{
+            handleFetchCategory,
+            handleFetchArea,
+            ...homePageState,
+        }}>
             {children}
         </HomeContext.Provider>
     )

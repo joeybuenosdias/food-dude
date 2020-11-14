@@ -1,9 +1,14 @@
 import { useContext } from 'react';
+
+/** components */
 import HomeContext from '../../Home/HomeContext'
+
+/** styles */
+import css from './Filter.module.css'
 
 export default function Filter() {
     return (
-        <div>
+        <div className={css.filter}>
             <CategoryFilter />
             <AreaFilter />
         </div>
@@ -14,10 +19,15 @@ export default function Filter() {
 function CategoryFilter() {
     const { handleFetchCategory, categoryData: { meals } } = useContext(HomeContext)
     return (
-        <div>
+        <div className={css.subFilter}>
+            <h3 className={css.title}>Search by Category</h3>
             {meals.map((meal) => {
                 return (
-                    <button onClick={() => handleFetchCategory(meal.strCategory)} key={meal.strCategory}>
+                    <button
+                        className={css.btn}
+                        onClick={() => handleFetchCategory(meal.strCategory)}
+                        key={meal.strCategory}
+                    >
                         {meal.strCategory}
                     </button>
                 )
@@ -27,12 +37,17 @@ function CategoryFilter() {
 }
 
 function AreaFilter() {
-    const { handleFetchCategory, areaData: { meals } } = useContext(HomeContext)
+    const { handleFetchArea, areaData: { meals } } = useContext(HomeContext)
     return (
-        <div>
+        <div className={css.subFilter}>
+            <h3 className={css.title}>Search by Area</h3>
             {meals.map((mealArea) => {
                 return (
-                    <button onClick={() => handleFetchCategory(mealArea.strArea)} key={mealArea.strArea}>
+                    <button
+                        className={css.btn}
+                        onClick={() => handleFetchArea(mealArea.strArea)}
+                        key={mealArea.strArea}
+                    >
                         {mealArea.strArea}
                     </button>
                 )
