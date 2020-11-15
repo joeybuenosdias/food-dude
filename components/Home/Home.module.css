@@ -1,3 +1,24 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #003060; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: 15% auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 .activeList {
     display: flex;
     flex-wrap: wrap;
@@ -43,6 +64,54 @@
     white-space: nowrap;
     width: 90%;
 }
+
+.more {
+    color: #003060;
+    font-weight: bold;
+    margin: 0;
+}
+
+.moreFilter {
+    padding: 16px 0;
+}
+
+.btn {
+    background-color: white;
+    border-radius: 4px;
+    color: #003060;
+    font-weight: bold;
+    margin: 0 8px 8px 0;
+    padding: 8px;
+    max-width: 175px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: #003060;
+    color: white;
+}
+
+.itemContent {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.hero {
+    max-width: 450px;
+    max-height: 450px;
+}
+
+/* @media only screen and (max-width: 768px) {
+    .moreFilter {
+        display: flex;
+        overflow-x: scroll;
+        width: 100%;
+        padding: 8px 0;
+    }
+} */
 
 /* @media only screen and (max-width: 768px) {
     .activeList {

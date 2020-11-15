@@ -21,16 +21,14 @@ function ActiveList() {
             <div>404 page here. Coming soon...</div>
         )
     } else if(isLoadingList) {
-        return (
-            <div>Loading...</div>
-        )
+        return <div className={css.loader} />
     } else if (!activeList.length) {
         return (
             <div>Please select a category</div>
         )
     } else if (foodItem?.idMeal) {
         return (
-            <FoodItem foodItem={foodItem} activeList={activeList} handleSetFoodItem={handleSetFoodItem} />
+            <FoodItem />
         )
     }
 
@@ -57,17 +55,24 @@ function ActiveList() {
     )
 }
 
-function FoodItem({ foodItem, activeList, handleSetFoodItem }) {
+function FoodItem() {
+    const { activeList, handleSetFoodItem, foodItem } = useContext(HomeContext)
     return (
         <div>
             <div>
-                <h3 className={css.title}>Items</h3>
-                <div className={css.subFilter}>
+                <h1>{foodItem.strMeal}</h1>
+                <div className={css.itemContent}>
+                    <img className={css.hero} src={foodItem.strMealThumb} />
+                    <Instructions />
+                </div>
+                <h3 className={css.more}>More Like {foodItem.strMeal}</h3>
+                <div className={css.moreFilter}>
                     {activeList.map((meal) => {
                         return (
                             <button
                                 key={meal.idMeal}
                                 onClick={() => handleSetFoodItem(meal.idMeal)}
+                                className={css.btn}
                             >
                                 {meal.strMeal}
                             </button>
@@ -75,8 +80,34 @@ function FoodItem({ foodItem, activeList, handleSetFoodItem }) {
                     })}
                 </div>
             </div>
-            <h1>{foodItem.strMeal}</h1>
-            <img src={foodItem.strMealThumb} />
+        </div>
+    )
+}
+
+function Instructions() {
+    const { foodItem } = useContext(HomeContext)
+    for(let i = 1; i <= 20; i++) {
+        console.log('i', i)
+    }
+    function instructionsList() {
+        let tableRows = []
+        for(let i = 1; i <= 20; i++) {
+            console.log('i', i)
+            tableRows.push(
+                <tr>
+                    <td>{foodItem[`strIngredient${i}`]}</td>
+                    <td>{foodItem[`strMeasure${i}`]}</td>
+                </tr>
+            )
+        }
+        return tableRows;
+    }
+    return (
+        <div className={css.instructionsContainer}>
+            <h2>Instructions</h2>
+            <table>
+                {instructionsList()}
+            </table>
         </div>
     )
 }
