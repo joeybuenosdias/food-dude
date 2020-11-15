@@ -12,7 +12,6 @@ export default function Layout({
             <div className={css.content}>
                 {children}
             </div>
-            <Footer />
         </div>
     )
 }
