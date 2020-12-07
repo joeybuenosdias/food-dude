@@ -69,6 +69,7 @@ function FoodItem() {
                 <h1 className={css.title}>{foodItem.strMeal}</h1>
                 <div className={css.itemContent}>
                     <img className={css.hero} src={foodItem.strMealThumb} />
+                    <Ingredients />
                     <Instructions />
                 </div>
                 <h3 className={css.more}>More Like {foodItem.strMeal}</h3>
@@ -90,13 +91,12 @@ function FoodItem() {
     )
 }
 
-function Instructions() {
+function Ingredients() {
     const { foodItem } = useContext(HomeContext)
 
-    function instructionsList() {
+    function ingredientsList() {
         let tableRows = []
         for(let i = 1; i <= 20; i++) {
-            console.log('i', i)
             tableRows.push(
                 <tr className={css.ingRow}>
                     <td className={css.ingName}>{foodItem[`strIngredient${i}`]}</td>
@@ -108,11 +108,22 @@ function Instructions() {
     }
 
     return (
-        <div className={css.instructionsContainer}>
+        <div className={css.ingredientsContainer}>
             <table>
                 <tr><th colspan="2"><h3>Ingredients</h3></th></tr>
-                {instructionsList()}
+                {ingredientsList()}
             </table>
+        </div>
+    )
+}
+
+function Instructions() {
+    const { foodItem } = useContext(HomeContext)
+
+    return (
+        <div className={css.instructionsContainer}>
+            <h3>Instructions</h3>
+            {foodItem.strInstructions}
         </div>
     )
 }
