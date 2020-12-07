@@ -1,0 +1,14 @@
+.svgContainer {
+    text-align: center;
+    color: white;
+    margin-bottom: 24px;
+}
+
+.svgContainer h4 {
+    margin: 0;
+}
+
+.svg {
+    height: 50px;
+    width: 50px;
+}
